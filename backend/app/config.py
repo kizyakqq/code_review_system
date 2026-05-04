@@ -4,12 +4,12 @@ from typing import List
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+ROOT_DIR = Path(__file__).resolve().parents[2]
 
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=BASE_DIR / ".env.local",
+        env_file=ROOT_DIR / ".env",
         case_sensitive=True,
         extra="ignore",
     )

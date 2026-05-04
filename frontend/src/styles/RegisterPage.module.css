@@ -1,0 +1,88 @@
+.registerForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: auto;
+}
+
+.h1 {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    font-family: 'Comfortaa', sans-serif;
+    margin: 30px 0 0 0;
+    color: #041E41;
+    width: 100%;
+    padding: 0;
+}
+
+.p {
+    text-align: center;
+    font-size: 20px;
+    width: 100%;
+    font-family: 'Comfortaa', sans-serif;
+    margin: 10px 0 0 0;
+    color: #041E41;
+    font-weight: 500;
+}
+
+.inputDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.input {
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px;
+    height: 20px;
+    border-radius: 12px;
+    padding: 10px;
+    border: 2px solid #014032;
+    background: #D4FFF6;
+    font-family: 'Comfortaa', sans-serif;
+    text-align: center;
+    color: #03624D;
+    font-size: 20px;
+}
+
+.input:focus {
+    border: 2px solid #014032;
+    outline: none;
+}
+
+.button {
+    font-family: "Comfortaa", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 6px 24px;
+    background-color: #3C6DB2;
+    color: #F1F6F7;
+    border: 2px solid #041E41;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    height: auto;
+    white-space: nowrap;
+    margin-top: 30px;
+}
+
+.button:hover {
+    background-color: #2d5a99;
+    transform: translateY(-2px);
+}
+
+.button:active {
+    transform: translateY(0);
+}
+
+.error {
+    font-family: "Comfortaa", sans-serif;
+    color: #CC7038;
+    margin-top: 15px;
+}
+

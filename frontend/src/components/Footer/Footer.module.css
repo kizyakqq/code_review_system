@@ -1,0 +1,33 @@
+.footer {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background-color: #03624D;
+    z-index: 1000;
+    border-top: 3px solid #014032;
+}
+
+.nav {
+    align-items: center;
+    height: 100%;
+    padding: 0 60px;
+    max-width: 1440px;
+    margin: 15px auto;
+}
+
+.logo {
+    font-family: "Comfortaa", sans-serif;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    font-size: 30px;
+    font-weight: 700;
+    color: #30B194;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.logo:hover {
+    opacity: 0.8;
+}

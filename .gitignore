@@ -45,8 +45,13 @@ env/
 *.db-wal
 
 # --- Логи ---
+logs
 *.log
-logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
 # --- Окружение и секреты ---
 .env
@@ -74,11 +79,16 @@ site/
 .DS_Store
 Thumbs.db
 
-# --- Node ---
-node_modules/
-npm-debug.log
-yarn-error.log
+# --- Node.js / Frontend ---
+frontend/node_modules/
+frontend/.next/
+frontend/dist/
+frontend/dist-ssr
+frontend/.vite/
+frontend/*.local
 
 # --- Docker ---
 .docker/
 *.dockerfile.local
+*.qcow2
+*.raw
