@@ -38,27 +38,3 @@
     gap: 25px;
     align-items: center;
 }
-
-.buttons button {
-    font-family: "Comfortaa", sans-serif;
-    font-size: 18px;
-    font-weight: 500;
-    padding: 6px 24px;
-    background-color: #3C6DB2;
-    color: #F1F6F7;
-    border: 2px solid #041E41;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    height: auto;
-    white-space: nowrap;
-}
-
-.buttons button:hover {
-    background-color: #2d5a99;
-    transform: translateY(-2px);
-}
-
-.buttons button:active {
-    transform: translateY(0);
-}

@@ -2,6 +2,7 @@ import styles from './Header.module.css';
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "../../context/AuthContext.tsx";
+import {Button} from "../Button/Button.tsx";
 
 interface HeaderProps {
     children?: React.ReactNode;
@@ -26,21 +27,21 @@ export const Header: React.FC<HeaderProps> = ({children}) => {
                 <div className={styles.buttons}>
                     {isAuthenticated ? (
                         <>
-                            <button onClick={() => navigate('/profile')}>
+                            <Button color={'secondary'} onClick={() => navigate('/profile')}>
                                 Личный кабинет
-                            </button>
-                            <button onClick={handleLogout}>
+                            </Button>
+                            <Button onClick={handleLogout}>
                                 Выйти
-                            </button>
+                            </Button>
                         </>
                     ) : (
                         <>
-                            <button onClick={() => navigate('/login')}>
+                            <Button onClick={() => navigate('/login')}>
                                 Войти
-                            </button>
-                            <button onClick={() => navigate('/register')}>
+                            </Button>
+                            <Button onClick={() => navigate('/register')}>
                                 Зарегистрироваться
-                            </button>
+                            </Button>
                         </>
                     )}
                 </div>
@@ -49,5 +50,5 @@ export const Header: React.FC<HeaderProps> = ({children}) => {
                 children
             }
         </header>
-    )
+    );
 }

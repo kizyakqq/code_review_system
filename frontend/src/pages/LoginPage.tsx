@@ -4,6 +4,8 @@ import {useAuth} from '../context/AuthContext';
 import {Header} from "../components/Header/Header";
 import {Footer} from "../components/Footer/Footer";
 import styles from "../styles/LoginPage.module.css";
+import {Button} from "../components/Button/Button.tsx";
+import {Input} from "../components/Input/Input.tsx";
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -21,7 +23,7 @@ export default function LoginPage() {
 
         try {
             await login(email, password);
-            navigate('/dashboard');
+            navigate('/');
         } catch (err: any) {
             setError(err.response?.data?.detail || 'Ошибка авторизации');
         } finally {
@@ -41,7 +43,7 @@ export default function LoginPage() {
                     <p className={styles.p}>Введите учётные данные для входа</p>
 
                     <div className={styles.inputDiv}>
-                        <input
+                        <Input
                             type="email"
                             value={email}
                             onChange={e => setEmail(e.target.value)}
@@ -52,7 +54,7 @@ export default function LoginPage() {
                     </div>
 
                     <div className={styles.inputDiv}>
-                        <input
+                        <Input
                             type="password"
                             value={password}
                             onChange={e => setPassword(e.target.value)}
@@ -63,13 +65,14 @@ export default function LoginPage() {
                     </div>
 
                     <div className={styles.inputDiv}>
-                        <button
+                        <Button
                             type="submit"
-                            className={styles.button}
+                            className={styles.logInButton}
+                            color={'secondary'}
                             disabled={isLoading}
                         >
                             {isLoading ? 'Вход...' : 'Войти'}
-                        </button>
+                        </Button>
                     </div>
 
                     {error && (

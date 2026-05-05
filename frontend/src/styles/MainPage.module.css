@@ -1,9 +1,9 @@
-.loginForm {
+.form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 500px;
+    width: 1000px;
     height: auto;
 }
 
@@ -23,22 +23,31 @@
     font-size: 20px;
     width: 100%;
     font-family: 'Comfortaa', sans-serif;
-    margin: 10px 0 0 0;
-    color: #041E41;
+    margin-top: 30px;
+    color: #F1F6F7;
     font-weight: 500;
+}
+
+.link {
+    color: #CC7038;
+}
+
+.link:hover {
+    color: #b05a28;
+}
+
+.link:active {
+    color: #8a451f;
 }
 
 .inputDiv {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
     margin-top: 30px;
+    gap: 100px;
 }
 
-.error {
-    font-family: "Comfortaa", sans-serif;
-    color: #CC7038;
-    margin-top: 15px;
+.inputDiv Button {
+    width: 325px;
 }
-

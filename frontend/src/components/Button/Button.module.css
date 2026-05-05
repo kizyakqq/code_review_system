@@ -1,0 +1,41 @@
+.button {
+    font-family: "Comfortaa", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 6px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+    height: auto;
+    white-space: nowrap;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+}
+
+.button:active {
+    transform: translateY(0);
+}
+
+.primary {
+    background-color: #3C6DB2;
+    color: #F1F6F7;
+    border: 2px solid #041E41;
+}
+
+.secondary {
+    background-color: #CC7038;
+    color: #F1F6F7;
+    border: 2px solid #632702;
+}
+
+.primary:hover {
+    background-color: #2a4d80;
+    border-color: #031530;
+}
+
+.secondary:hover {
+    background-color: #a85a2a;
+    border-color: #4a1d01;
+}

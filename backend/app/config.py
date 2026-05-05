@@ -42,7 +42,7 @@ class Settings(BaseSettings):
     OLLAMA_TEMPERATURE: float
     OLLAMA_MAX_TOKENS: int
     OLLAMA_TOP_P: float
-    ALLOWED_LLM_MODELS: List[str] = ["llama3", "phi3"]
+    ALLOWED_LLM_MODELS: List[str] = ["llama3", "phi3", "tinyllama", "gemma3"]
 
     @property
     def database_url(self) -> str:

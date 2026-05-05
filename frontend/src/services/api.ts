@@ -22,12 +22,13 @@ export const reviewAPI = {
         const form = new FormData();
         form.append('file', file);
         form.append('model_name', model);
-        return api.post('/reviews/upload', form, {
+        return api.post('/reviews', form, {
             headers: {'Content-Type': 'multipart/form-data'},
         });
     },
     getList: (page = 1) => api.get('/reviews', {params: {page}}),
     getById: (id: number) => api.get(`/reviews/${id}`),
+    getModels: () => api.get('/models'),
 };
 
 export default api;

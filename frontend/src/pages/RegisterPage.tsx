@@ -3,6 +3,8 @@ import {useNavigate} from 'react-router-dom';
 import {useAuth} from '../context/AuthContext';
 import {Header} from "../components/Header/Header";
 import {Footer} from "../components/Footer/Footer";
+import {Button} from "../components/Button/Button.tsx";
+import {Input} from "../components/Input/Input.tsx";
 import styles from "../styles/RegisterPage.module.css";
 
 export default function RegisterPage() {
@@ -42,7 +44,7 @@ export default function RegisterPage() {
                     <p className={styles.p}>Введите данные для регистрации</p>
 
                     <div className={styles.inputDiv}>
-                        <input
+                        <Input
                             type="username"
                             value={username}
                             onChange={e => setUsername(e.target.value)}
@@ -53,7 +55,7 @@ export default function RegisterPage() {
                     </div>
 
                     <div className={styles.inputDiv}>
-                        <input
+                        <Input
                             type="email"
                             value={email}
                             onChange={e => setEmail(e.target.value)}
@@ -64,7 +66,7 @@ export default function RegisterPage() {
                     </div>
 
                     <div className={styles.inputDiv}>
-                        <input
+                        <Input
                             type="password"
                             value={password}
                             onChange={e => setPassword(e.target.value)}
@@ -75,13 +77,14 @@ export default function RegisterPage() {
                     </div>
 
                     <div className={styles.inputDiv}>
-                        <button
+                        <Button
                             type="submit"
                             className={styles.button}
+                            color={'secondary'}
                             disabled={isLoading}
                         >
                             {isLoading ? 'Регистрация...' : 'Зарегистрироваться'}
-                        </button>
+                        </Button>
                     </div>
 
                     {error && (

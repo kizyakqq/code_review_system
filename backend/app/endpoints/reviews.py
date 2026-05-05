@@ -20,7 +20,7 @@ router = APIRouter(prefix="/reviews", tags=["Code Reviews"])
 
 
 @router.post(
-    "/upload",
+    "",
     response_model=ReviewResponse,
     summary="Отправить код на рецензирование",
     status_code=status.HTTP_201_CREATED

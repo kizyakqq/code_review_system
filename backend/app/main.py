@@ -11,7 +11,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import engine, Base
-from app.endpoints import auth, reviews
+from app.endpoints import auth, reviews, llm_models
 
 logging.basicConfig(
     level=logging.INFO,
@@ -51,6 +51,7 @@ app.add_middleware(
 
 app.include_router(auth.router, prefix="/api")
 app.include_router(reviews.router, prefix="/api")
+app.include_router(llm_models.router, prefix="/api")
 
 
 @app.get("/health")
