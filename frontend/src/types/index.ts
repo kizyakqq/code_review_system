@@ -14,9 +14,9 @@ export interface User {
 export interface LinterIssue {
     id: number;
     line_number: number;
-    rule_code: string;
     message: string;
-    tool_name: string;
+    tool_name: string | null;
+    rule_code: string | null;
     severity: string;
 }
 

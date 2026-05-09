@@ -38,7 +38,7 @@ export default function RegisterPage() {
             <main>
                 <form
                     onSubmit={handleSubmit}
-                    className={styles.RegisterForm}
+                    className={styles.registerForm}
                 >
                     <h1 className={styles.h1}>Регистрация</h1>
                     <p className={styles.p}>Введите данные для регистрации</p>

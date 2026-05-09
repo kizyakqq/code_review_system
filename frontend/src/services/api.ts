@@ -26,9 +26,13 @@ export const reviewAPI = {
             headers: {'Content-Type': 'multipart/form-data'},
         });
     },
+    delete: (id: number) => api.delete(`/reviews/${id}`),
     getList: (page = 1) => api.get('/reviews', {params: {page}}),
     getById: (id: number) => api.get(`/reviews/${id}`),
-    getModels: () => api.get('/models'),
 };
+
+export const modelsAPI = {
+    get: () => api.get('/models'),
+}
 
 export default api;

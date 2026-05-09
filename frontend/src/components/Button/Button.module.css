@@ -1,12 +1,12 @@
 .button {
     font-family: "Comfortaa", sans-serif;
-    font-size: 18px;
+    font-size: 26px;
     font-weight: 500;
     padding: 6px 24px;
     border-radius: 12px;
     cursor: pointer;
     transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-    height: auto;
+    height: 60px;
     white-space: nowrap;
 }
 

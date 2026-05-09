@@ -1,6 +1,6 @@
 from typing import Optional, List
 
-from sqlalchemy import ForeignKey, Text, String, Enum, Index, UniqueConstraint, CheckConstraint
+from sqlalchemy import ForeignKey, Text, String, Enum, Index, CheckConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base, int_pk
@@ -55,35 +55,6 @@ class Review(Base):
         return str(self)
 
 
-class LinterRule(Base):
-    __tablename__ = "linter_rules"
-
-    id: Mapped[int_pk]
-    tool_name: Mapped[str] = mapped_column(String(100), nullable=False, index=True)
-    rule_code: Mapped[str] = mapped_column(String(50), nullable=False)
-    description: Mapped[Optional[str]] = mapped_column(Text)
-    severity: Mapped[Severity] = mapped_column(
-        Enum(Severity),
-        nullable=False,
-        default=Severity.INFO,
-        index=True
-    )
-
-    __table_args__ = (
-        UniqueConstraint("tool_name", "rule_code", name="uq_linter_rules_tool_code"),
-    )
-
-    issues: Mapped[List["LinterIssue"]] = relationship("LinterIssue", back_populates="rule")
-
-    def __str__(self):
-        return (f"{self.__class__.__name__}(id={self.id}, "
-                f"tool={self.tool_name!r}, "
-                f"code={self.rule_code!r})")
-
-    def __repr__(self):
-        return str(self)
-
-
 class LinterIssue(Base):
     __tablename__ = "linter_issues"
 
@@ -93,13 +64,11 @@ class LinterIssue(Base):
         index=True,
         nullable=False
     )
-    rule_id: Mapped[int] = mapped_column(
-        ForeignKey("linter_rules.id"),
-        index=True,
-        nullable=False
-    )
     line_number: Mapped[int] = mapped_column(nullable=False)
     message: Mapped[str] = mapped_column(Text, nullable=False)
+
+    rule_code: Mapped[Optional[str]] = mapped_column(nullable=True)
+    tool_name: Mapped[Optional[str]] = mapped_column(nullable=True)
 
     severity: Mapped[Severity] = mapped_column(
         Enum(Severity),
@@ -108,15 +77,6 @@ class LinterIssue(Base):
     )
 
     review: Mapped["Review"] = relationship("Review", back_populates="linter_issues")
-    rule: Mapped["LinterRule"] = relationship("LinterRule", back_populates="issues")
-
-    @property
-    def rule_code(self) -> Optional[str]:
-        return self.rule.rule_code if self.rule else None
-
-    @property
-    def tool_name(self) -> Optional[str]:
-        return self.rule.tool_name if self.rule else None
 
     def __str__(self):
         return (f"{self.__class__.__name__}(id={self.id}, "

@@ -2,19 +2,20 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: auto;
+    height: 80px;
     background-color: #03624D;
     z-index: 1000;
     border-bottom: 3px solid #014032;
+    display: flex;
+    justify-content: center;
 }
 
 .nav {
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    height: 100%;
     padding: 0 60px;
-    max-width: 1440px;
-    margin: 15px auto;
+    margin: 15px 0;
 }
 
 .logo {

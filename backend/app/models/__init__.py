@@ -1,4 +1,4 @@
 from .user import User
-from .review import Review, LinterRule, LinterIssue, LLMSuggestion
+from .review import Review, LinterIssue, LLMSuggestion
 
-__all__ = ["User", "Review", "LinterIssue", "LinterRule", "LLMSuggestion"]
+__all__ = ["User", "Review", "LinterIssue", "LLMSuggestion"]

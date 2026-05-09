@@ -85,23 +85,35 @@ class LinterService:
                 temp_path
             ]
 
-            proc = await asyncio.create_subprocess_exec(
-                *cmd,
-                stdout=asyncio.subprocess.PIPE,
-                stderr=asyncio.subprocess.PIPE
-            )
+            def _run_pylint_sync(cmd: list, timeout: int):
+                return subprocess.run(
+                    cmd,
+                    capture_output=True,
+                    text=True,
+                    timeout=timeout,
+                    check=False
+                )
 
             try:
-                stdout, stderr = await asyncio.wait_for(
-                    proc.communicate(),
-                    timeout=self.timeout
-                )
-            except asyncio.TimeoutError:
+                result = await asyncio.to_thread(_run_pylint_sync, cmd, self.timeout)
+                stdout = result.stdout.encode() if result.stdout else b""
+                stderr = result.stderr.encode() if result.stderr else b""
+
+                if result.returncode == -9:
+                    raise asyncio.TimeoutError()
+
+            except subprocess.TimeoutExpired:
                 logger.error(f"Pylint timeout после {self.timeout}с")
                 return [LinterIssueBase(
                     line_number=0, rule_code="TIMEOUT",
                     message=f"Analysis timeout ({self.timeout}s)",
                     severity=Severity.CRITICAL
+                )]
+            except Exception as e:
+                logger.exception(f"Ошибка запуска pylint: {e}")
+                return [LinterIssueBase(
+                    line_number=0, rule_code="INTERNAL_ERROR",
+                    message=str(e), severity=Severity.CRITICAL
                 )]
 
             if stdout:

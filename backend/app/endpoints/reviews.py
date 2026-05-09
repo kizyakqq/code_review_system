@@ -8,7 +8,7 @@ from sqlalchemy.orm import selectinload
 
 from app.config import settings
 from app.dependencies import get_current_user, get_db
-from app.models import User, Review, LinterRule, LinterIssue, LLMSuggestion
+from app.models import User, Review, LinterIssue, LLMSuggestion
 from app.models.enums import ReviewStatus
 from app.schemas.review import ReviewResponse, ReviewListResponse, ReviewShortResponse, ReviewDetailResponse
 from app.services.linters.pylint_linter import LinterService
@@ -80,37 +80,11 @@ async def create_code_review(
             error_msg = str(llm_result) if isinstance(llm_result, Exception) else llm_result.error_message
             logger.warning(f"LLM failed: {error_msg}")
 
-        rule_codes = {issue.rule_code for issue in linter_issues if issue.rule_code}
-        rules_map = {}
-
-        if rule_codes:
-            existing_rules = await db.execute(
-                select(LinterRule).where(
-                    (LinterRule.tool_name == "pylint") &
-                    (LinterRule.rule_code.in_(rule_codes))
-                )
-            )
-            rules_map = {r.rule_code: r for r in existing_rules.scalars().all()}
-
         for issue in linter_issues:
-            if not issue.rule_code:
-                continue
-
-            rule = rules_map.get(issue.rule_code)
-            if not rule:
-                rule = LinterRule(
-                    tool_name="pylint",
-                    rule_code=issue.rule_code,
-                    description=issue.message,
-                    severity=issue.severity
-                )
-                db.add(rule)
-                await db.flush()
-                rules_map[issue.rule_code] = rule
-
             db.add(LinterIssue(
                 review_id=review.id,
-                rule_id=rule.id,
+                rule_code=issue.rule_code,
+                tool_name=issue.tool_name,
                 line_number=issue.line_number,
                 message=issue.message,
                 severity=issue.severity
@@ -140,11 +114,12 @@ async def create_code_review(
                                  :10000] if not llm_failed else "LLM analysis failed. Linter results only."
 
         await db.commit()
+        await db.refresh(review)
 
         review_with_relations = await db.execute(
             select(Review)
             .options(
-                selectinload(Review.linter_issues).joinedload(LinterIssue.rule),
+                selectinload(Review.linter_issues),
                 selectinload(Review.llm_suggestions)
             )
             .where(Review.id == review.id)
@@ -210,11 +185,11 @@ async def get_review(
 ):
     query = (
         select(Review)
+        .where(Review.id == review_id)
         .options(
-            selectinload(Review.linter_issues).joinedload(LinterIssue.rule),
+            selectinload(Review.linter_issues),
             selectinload(Review.llm_suggestions)
         )
-        .where(Review.id == review_id)
     )
     result = await db.execute(query)
     review = result.scalar_one_or_none()

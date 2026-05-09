@@ -1,11 +1,11 @@
 .select {
     font-family: "Comfortaa", sans-serif;
-    font-size: 18px;
+    font-size: 26px;
     font-weight: 500;
     padding: 6px 24px;
     border-radius: 12px;
     cursor: pointer;
-    height: auto;
+    height: 60px;
     white-space: nowrap;
     width: 325px;
     background-color: #3C6DB2;
@@ -17,7 +17,7 @@
 
 .select:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .select:active {
@@ -27,9 +27,4 @@
 .select:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(60, 109, 178, 0.3);
-}
-
-.select[value=""],
-.select:has(option[value=""]:checked) {
-    color: rgba(241, 246, 247, 0.6);
 }
