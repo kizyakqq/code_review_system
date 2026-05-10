@@ -25,22 +25,22 @@ export const Header: React.FC<HeaderProps> = ({children}) => {
                     Code Review
                 </button>
                 <div className={styles.buttons}>
-                    {isAuthenticated ? (
-                        <>
-                            <Button color={'secondary'} onClick={() => navigate('/profile')}>
-                                Личный кабинет
-                            </Button>
-                            <Button onClick={handleLogout}>
-                                Выйти
-                            </Button>
-                        </>
-                    ) : (
+                    {!isAuthenticated ? (
                         <>
                             <Button onClick={() => navigate('/login')}>
                                 Войти
                             </Button>
                             <Button onClick={() => navigate('/register')}>
                                 Зарегистрироваться
+                            </Button>
+                        </>
+                    ) : (
+                        <>
+                            <Button color={'secondary'} onClick={() => navigate('/profile')}>
+                                Личный кабинет
+                            </Button>
+                            <Button onClick={handleLogout}>
+                                Выйти
                             </Button>
                         </>
                     )}
