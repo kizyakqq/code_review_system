@@ -3,7 +3,6 @@ import type { Review } from '../types';
 export function formatReviewResult(review: Review): string {
     const lines: string[] = [];
 
-    lines.push(`📄 Файл: ${review.filename}`);
     lines.push(`📅 Создано: ${new Date(review.created_at).toLocaleString()}`);
     lines.push(`📌 Статус: ${review.status}`);
     lines.push('');
