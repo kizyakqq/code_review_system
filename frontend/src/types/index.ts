@@ -1,4 +1,5 @@
 export interface AuthResponse {
+    email: string;
     access_token: string;
     token_type: string;
     user_id: number;
@@ -9,6 +10,7 @@ export interface AuthResponse {
 export interface User {
     id: number;
     username: string;
+    email: string;
 }
 
 export interface LinterIssue {
@@ -36,4 +38,12 @@ export interface Review {
     linter_issues: LinterIssue[];
     llm_suggestions: LLMSuggestion[];
     created_at: string;
+    model_name: string;
+}
+
+export interface ReviewListResponse {
+    items: Review[];
+    total: number;
+    page: number;
+    page_size: number;
 }

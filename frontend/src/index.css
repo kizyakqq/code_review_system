@@ -17,6 +17,7 @@ body {
     display: flex;
     flex-direction: column;
     background-color: #30B194;
+    overflow-y: auto;
 }
 
 main {

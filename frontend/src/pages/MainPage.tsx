@@ -3,16 +3,17 @@ import {Header} from "../components/Header/Header.tsx";
 import styles from "../styles/MainPage.module.css";
 import {Button} from "../components/Button/Button.tsx";
 import {Footer} from "../components/Footer/Footer.tsx";
-// import {Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Select} from "../components/Select/Select.tsx";
 import {type ChangeEvent, type SyntheticEvent, useEffect, useRef, useState} from "react";
 import {modelsAPI, reviewAPI} from "../services/api.ts";
 import {Input} from "../components/Input/Input.tsx";
 import type {Review} from "../types";
 import {formatReviewResult} from '../utils/formatters'
+import {useAuth} from "../context/AuthContext.tsx";
 
 export default function MainPage() {
-    // const {isAuthenticated} = useAuth();
+    const {isAuthenticated} = useAuth();
     const [selectedModel, setSelectedModel] = useState<string>('Выберите модель');
     const [availableModels, setAvailableModels] = useState<string[]>([]);
     const [error, setError] = useState('');
@@ -80,46 +81,46 @@ export default function MainPage() {
                 >
                     <h1 className={styles.h1}>Авторецензирование кода с помощью LLM</h1>
 
-                    {/*{{isAuthenticated ? }
-                        <>*/}
-                    <div className={styles.inputDiv}>
-                        <div className={styles.fileInputWrapper}>
-                            <Input
-                                required
-                                type="file"
-                                id="file-upload"
-                                accept=".py"
-                                onChange={handleFileChange}
-                                className={styles.fileInput}
-                            />
+                    {isAuthenticated ? (
+                        <>
+                            <div className={styles.inputDiv}>
+                                <div className={styles.fileInputWrapper}>
+                                    <Input
+                                        required
+                                        type="file"
+                                        id="file-upload"
+                                        accept=".py"
+                                        onChange={handleFileChange}
+                                        className={styles.fileInput}
+                                    />
 
-                            <label htmlFor="file-upload" className={styles.fileLabel}>
-                                {!file ? (
-                                    <div>Выбрать файл</div>
-                                ) : (
-                                    <div>📄 {file.name}</div>
-                                )}
-                            </label>
-                        </div>
-                        <Select
-                            required
-                            value={selectedModel}
-                            onChange={(e) => setSelectedModel(e.target.value)}
-                        >
-                            <option value={''} hidden>Выберите модель</option>
-                            {availableModels.length === 0 ? (
-                                <option disabled>Загрузка моделей...</option>
-                            ) : (
-                                availableModels.map(model => (
-                                    <option key={model} value={model}>
-                                        {model}
-                                    </option>
-                                ))
-                            )}
-                        </Select>
-                    </div>
+                                    <label htmlFor="file-upload" className={styles.fileLabel}>
+                                        {!file ? (
+                                            <div>Выбрать файл</div>
+                                        ) : (
+                                            <div>📄 {file.name}</div>
+                                        )}
+                                    </label>
+                                </div>
+                                <Select
+                                    required
+                                    value={selectedModel}
+                                    onChange={(e) => setSelectedModel(e.target.value)}
+                                >
+                                    <option value={''} hidden>Выберите модель</option>
+                                    {availableModels.length === 0 ? (
+                                        <option disabled>Загрузка моделей...</option>
+                                    ) : (
+                                        availableModels.map(model => (
+                                            <option key={model} value={model}>
+                                                {model}
+                                            </option>
+                                        ))
+                                    )}
+                                </Select>
+                            </div>
 
-                    <div className={styles.inputDiv}>
+                            <div className={styles.inputDiv}>
                                 <pre className={styles.textarea}>
                                     {isLoading
                                         ? 'Анализ кода... Пожалуйста, подождите.'
@@ -128,27 +129,27 @@ export default function MainPage() {
                                             : 'Загрузите файл, выберите модель и нажмите "Получить ревью".'
                                     }
                                 </pre>
-                    </div>
+                            </div>
 
-                    <div className={styles.inputDiv}>
-                        <Button onClick={handleClear}>
-                            Очистить
-                        </Button>
-                        <Button
-                            type="submit"
-                            disabled={isLoading || !file}
-                            color={"secondary"}
-                        >
-                            {isLoading ? 'Анализ кода...' : 'Получить ревью'}
-                        </Button>
-                    </div>
+                            <div className={styles.inputDiv}>
+                                <Button onClick={handleClear}>
+                                    Очистить
+                                </Button>
+                                <Button
+                                    type="submit"
+                                    disabled={isLoading || !file}
+                                    color={"secondary"}
+                                >
+                                    {isLoading ? 'Анализ кода...' : 'Получить ревью'}
+                                </Button>
+                            </div>
 
-                    {error && (
-                        <div className={styles.error}>
-                            {error}
-                        </div>
-                    )}
-                    {/* </>
+                            {error && (
+                                <div className={styles.error}>
+                                    {error}
+                                </div>
+                            )}
+                        </>
 
                     ) : (
                         <>
@@ -167,7 +168,7 @@ export default function MainPage() {
                                 </Link>
                             </p>
                         </>
-                    )}*/}
+                    )}
                 </form>
             </main>
             <Footer/>

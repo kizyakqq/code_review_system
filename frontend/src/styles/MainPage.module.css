@@ -110,9 +110,15 @@
     font-family: 'Comfortaa', sans-serif;
     height: 350px;
     margin: 0;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .textarea p {
     width: 800px;
+}
+
+.error {
+    font-family: "Comfortaa", sans-serif;
+    color: #CC7038;
+    margin-top: 15px;
 }

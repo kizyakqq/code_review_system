@@ -142,7 +142,7 @@ async def create_code_review(
 @router.get("", response_model=ReviewListResponse)
 async def list_reviews(
         page: int = 1,
-        page_size: int = 10,
+        page_size: int = 5,
         current_user: User = Depends(get_current_user),
         db: AsyncSession = Depends(get_db)
 ):

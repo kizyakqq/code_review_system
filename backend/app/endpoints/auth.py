@@ -85,6 +85,7 @@ async def login(
         token_type="bearer",
         user_id=user.id,
         username=user.username,
+        email=user.email,
         expires_at=int((datetime.now(UTC) + access_token_expires).timestamp())
     )
 

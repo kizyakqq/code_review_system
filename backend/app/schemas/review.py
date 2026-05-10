@@ -34,6 +34,7 @@ class ReviewResponse(ReviewBase):
 class ReviewShortResponse(BaseModel):
     id: int
     filename: str
+    model_name: str
     status: ReviewStatus
     created_at: datetime
 
